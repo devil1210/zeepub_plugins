@@ -1,4 +1,4 @@
-﻿import 'widgets/zeepub_cached_image.dart';
+import 'widgets/zeepub_cached_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -193,7 +193,12 @@ class _ZeepubPublisherViewState extends State<ZeepubPublisherView> {
               children: [
                 const Icon(Icons.send_rounded, color: Color(0xFF38BDF8)),
                 const SizedBox(width: 10),
-                Text('Publicador Oficial Telegram · ${widget.volume.title}'),
+                Expanded(
+                  child: Text(
+                    'Publicador Oficial Telegram · ${widget.volume.title}',
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
               ],
             ),
           ),
@@ -262,6 +267,7 @@ class _ZeepubPublisherViewState extends State<ZeepubPublisherView> {
                         // Channel Dropdown
                         Expanded(
                           child: DropdownButtonFormField<int>(
+                            isExpanded: true,
                             initialValue: _selectedChannel?.id,
                             decoration: const InputDecoration(
                               labelText: 'Canal de Destino',
@@ -271,7 +277,10 @@ class _ZeepubPublisherViewState extends State<ZeepubPublisherView> {
                             items: channels.map((c) {
                               return DropdownMenuItem<int>(
                                 value: c.id,
-                                child: Text(c.name.isNotEmpty ? c.name : c.channelId),
+                                child: Text(
+                                  c.name.isNotEmpty ? c.name : c.channelId,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               );
                             }).toList(),
                             onChanged: (id) {
@@ -288,6 +297,7 @@ class _ZeepubPublisherViewState extends State<ZeepubPublisherView> {
                         // Template Dropdown
                         Expanded(
                           child: DropdownButtonFormField<int>(
+                            isExpanded: true,
                             initialValue: _selectedTemplate?.id,
                             decoration: const InputDecoration(
                               labelText: 'Plantilla Editorial',
@@ -297,7 +307,10 @@ class _ZeepubPublisherViewState extends State<ZeepubPublisherView> {
                             items: templates.map((t) {
                               return DropdownMenuItem<int>(
                                 value: t.id,
-                                child: Text(t.name),
+                                child: Text(
+                                  t.name,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               );
                             }).toList(),
                             onChanged: (id) {

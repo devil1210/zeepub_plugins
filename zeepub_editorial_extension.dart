@@ -14,6 +14,16 @@ class ZeepubEditorialExtension implements ZeeToolsPluginExtension {
   String get id => 'zeepub_editorial';
 
   @override
+  PluginManifest get manifest => const PluginManifest(
+        id: 'zeepub_editorial',
+        name: 'Consola Editorial ZeePub',
+        version: '1.0.0',
+        author: 'ZeePub Team',
+        description: 'Herramienta integral de catalogación y gestión editorial de ZeePub.',
+        icon: 'auto_stories',
+      );
+
+  @override
   Widget buildView(BuildContext context, PluginManifest manifest) {
     return BlocProvider(
       create: (_) => getIt<ZeepubEditorialCubit>(),

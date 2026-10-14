@@ -1,4 +1,5 @@
 import '/inject_dependencies.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zeetools/features/plugins/data/plugin_registry.dart';
 
 import 'data/datasources/zeepub_api_client.dart';
@@ -22,12 +23,15 @@ void registerZeepubPlugins(PluginRegistry registry) {
   }
   if (!getIt.isRegistered<ZeepubEditorialRepository>()) {
     getIt.registerLazySingleton<ZeepubEditorialRepository>(
-      () => ZeepubEditorialRepository(getIt<ZeepubApiClient>()),
+      () => ZeepubEditorialRepository(
+        client: getIt<ZeepubApiClient>(),
+        prefs: getIt<SharedPreferences>(),
+      ),
     );
   }
   if (!getIt.isRegistered<ZeepubEditorialCubit>()) {
     getIt.registerFactory<ZeepubEditorialCubit>(
-      () => ZeepubEditorialCubit(getIt<ZeepubEditorialRepository>()),
+      () => ZeepubEditorialCubit(repository: getIt<ZeepubEditorialRepository>()),
     );
   }
 
